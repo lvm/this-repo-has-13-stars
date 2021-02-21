@@ -1,0 +1,15 @@
+name: "How many stars?"
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  how-many-stars:
+    runs-on: ubuntu-latest
+    steps:
+     - name: "rename repo"
+       run: python how-many.py
+       env:
+         REPO_ID: ${{ secrets.REPO_ID }}
+         TOKEN: ${{ secrets.TOKEN }}
