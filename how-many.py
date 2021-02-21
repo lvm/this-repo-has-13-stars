@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-this-repo-has-many-stars - Counts how many stars a repo has and renames it accordingly
+how-many.py - Counts how many stars a repo has and renames it accordingly
 License: BSD 3-Clause
 Copyright (c) 2021, Mauro <mauro@sdf.org>
 All rights reserved.
@@ -69,15 +69,13 @@ def PATCH(
 ) -> Union[http.client.HTTPResponse, NoReturn]:
     "HTTP(s) PATCH Requests"
     request = urllib.request.Request(url, method="PATCH")
-    req.add_header("Authorization", f"Token {token}")
-    req.add_header("Content-Type", "application/json")
-    req.add_header("Accept", "application/json")
+    request.add_header("Authorization", f"Token {token}")
+    request.add_header("Content-Type", "application/json")
+    request.add_header("Accept", "application/json")
     request.add_header("Pragma", "no-cache")
     request.add_header("User-Agent", f"this-repo-has-x-stars/{__version__}")
-    with urllib.request.urlopen(request, data=data) as response:
-        # assert response.status == 200, "Oops! HTTP Request failed: {response.status}"
-
-        print(response.status)
+    with urllib.request.urlopen(request, data=bytes(json.dumps(data), encoding="utf8")) as response:
+        assert response.status == 200, "Oops! HTTP Request failed: {response.status}"
         return response.read().decode("utf-8")
 
 
@@ -86,16 +84,14 @@ def rename_repo(repo_id: int, token: str) -> Literal[None]:
     response = GET(repository(repo_id))
     response = json.loads(response)
 
-    old_name = response.get("name")
-    stars = response.get("stargazers_count")
+    old_name = str(response.get("full_name"))
+    stars = str(response.get("stargazers_count"))
 
     response = PATCH(
-        f"https://api.github.com/repos/owner/{old_name}",
+        f"https://api.github.com/repos/{old_name}",
         {"name": f"this-repo-has-{stars}-stars"},
         token,
     )
-
-    print(response)
 
 
 
