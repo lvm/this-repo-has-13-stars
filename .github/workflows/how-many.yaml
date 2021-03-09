@@ -2,7 +2,7 @@ name: "How many stars?"
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "0 23 * * *"
 
 jobs:
   how-many-stars:
