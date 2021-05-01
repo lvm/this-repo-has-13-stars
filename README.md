@@ -8,4 +8,4 @@ This project is a toy project that run on Github's workflow. Every time someone 
 
 ## License? 
 
-uuhm. what about [BSD3](LICENSE)? 
+uhm. what about [BSD3](LICENSE)? 
