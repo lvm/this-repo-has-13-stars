@@ -7,7 +7,7 @@ Inspired by [Tom Scott's video](https://www.youtube.com/watch?v=BxV14h0kFs0)
 This project is a toy project that run on Github's workflow. Every time [*] someone _stars_ this repo, [a script](how-many.py) updates the name of the repository. Give it a try!
 
 
-[*] Every night at 23 hs will update. 
+[*] Not anymore since this project has been archived. 
 
 ## License? 
 
